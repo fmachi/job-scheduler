@@ -4,6 +4,7 @@ import com.company.jobscheduler.jobs.IJob;
 import com.company.jobscheduler.scheduler.checker.FutureChecker;
 import com.company.jobscheduler.scheduler.checker.FutureCheckerFactory;
 
+import javax.annotation.PreDestroy;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -34,11 +35,17 @@ public class JobScheduler implements IJob
     exception.ifPresent(
         e ->
         {
-          executorService.shutdownNow();
+          destroy();
           throw new InnerExecutionException(e);
         }
     );
 
+  }
+
+  @PreDestroy
+  public void destroy()
+  {
+    executorService.shutdownNow();
   }
 
   private LinkedList<Future> scheduleTasks()
