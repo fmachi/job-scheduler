@@ -34,3 +34,5 @@ no easy way to stop it (takeWhile will be added in java 9)
 
 In order to make unit tests I create stubs for jobs taking a while and for jobs throwing
 exceptions.
+
+I added the project on travis in order to have a continuous integration tool.
