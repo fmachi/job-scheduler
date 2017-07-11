@@ -14,14 +14,12 @@ import java.util.stream.Collectors;
 
 public class JobScheduler implements IJob
 {
-  private final int numberOfThreads;
   private final List<IJob> tasks;
   private final ExecutorService executorService;
   private final FutureCheckerFactory futureCheckerFactory;
 
   public JobScheduler(int numberOfThreads, List<IJob> tasks, FutureCheckerFactory futureCheckerFactory)
   {
-    this.numberOfThreads = numberOfThreads;
     this.tasks = tasks;
     executorService = Executors.newFixedThreadPool(numberOfThreads);
     this.futureCheckerFactory = futureCheckerFactory;
@@ -78,7 +76,7 @@ public class JobScheduler implements IJob
     return Optional.empty();
   }
 
-  private class InnerExecutionException extends RuntimeException
+  class InnerExecutionException extends RuntimeException
   {
     public InnerExecutionException(Throwable cause)
     {
