@@ -26,8 +26,9 @@ the job instances it receives in the constructor once the execute method is invo
 Then it checks periodically (the period can be configured) in order to checks whether
 tasks are completed or whether an exception is thrown.
 A List is used to store Future and in case the job execution is not completed, the future
-is added again to the list. In case of exception from once of the inner job, the first
-caught exception is propagated to the caller.
+is added again to the list.
+This data structure is not thread safe but in the implementation is just one thread working on it.
+In case of exception from once of the inner job, the first caught exception is propagated to the caller.
 
 Unfortunately I made the checking of Future inside a stream generated but there's
 no easy way to stop it (takeWhile will be added in java 9)
